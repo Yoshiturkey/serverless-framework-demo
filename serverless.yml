@@ -1,4 +1,4 @@
-service: cristallum-demo-service
+service: cristallum-demo-service # please change your service name
 frameworkVersion: '2'
 
 provider:
