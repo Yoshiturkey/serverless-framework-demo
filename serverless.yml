@@ -1,0 +1,28 @@
+service: cristallum-demo-service
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: ap-northeast-1
+
+environment:
+  NODE_ENV: dev
+
+functions:
+  index:
+    handler: app/handler.index
+    events:
+      - http:
+          path: /
+          method: get
+  create:
+    handler: app/handler.create
+    events:
+      - http:
+          path: /
+          method: post
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
