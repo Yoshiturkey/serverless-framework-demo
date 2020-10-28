@@ -1,19 +1,18 @@
 import dayjs from 'dayjs'
-import 'dayjs/locale/ja'
-import relativeTime from 'dayjs/plugin/relativeTime'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
 
-export default class ServiceControler {
+import Controller from './Controller'
+
+export default class ServiceController extends Controller {
   async index() {
-    dayjs.locale('ja')
-    dayjs.extend(relativeTime)
+    dayjs.extend(utc)
+    dayjs.extend(timezone)
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: 'Hello My API [GET /]',
-        access: dayjs().locale('ja').format(),
-      }),
-    }
+    return this.response(200, {
+      message: 'Hello My API [GET /]',
+      access: dayjs().tz('Asia/Tokyo').format(),
+    })
   }
   async create(event: any) {
     const response = {
